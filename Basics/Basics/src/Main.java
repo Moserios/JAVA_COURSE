@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.Arrays;
+import java.util.function.IntBinaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -473,6 +474,75 @@ public class Main {
         weekdayActions(dayOfWeek.Monday);
         weekdayActions(dayOfWeek.Sunday);
 
+
+        //Exceptions handling
+        System.out.println("\n\nExceptions handling");
+        double d1 = 5;
+        double d2 = 2;
+        double result3 = divide(d1, d2);
+        System.out.printf("Divide result for %f and %f is: %f", d1, d2, result3);
+
+        int d3 = 2;
+        int d4 = 0;
+        double result4 = divideInt(d3, d4);
+        System.out.printf("Divide result for %d and %d is: %f", d3, d4, result4);
+
+
+        //Throwing exception with THROW keyword
+        System.out.println("\n\nThrowing exception with THROW keyword");
+        double result5 = divideCheck(10, 0);
+        System.out.println(result5);
+
+
+        //Lambda expressions
+        System.out.println("\n\nLambda expressions");
+        IntBinaryOperator sum = (x1,y1) -> x1 + y1;
+        int result6 = sum.applyAsInt(101, 2002);
+        System.out.println(result6);
+
+
+
+    }
+
+    public static double divideCheck(int value1, int value2){
+        double value3 = 0;
+        if (value2 == 0){
+            System.out.println("\nCan't divide by 0");
+            return 0;
+            //throw new ArithmeticException("Can't divide by 0");
+        }
+        value3 = value1 / value2;
+        return value3;
+    }
+
+
+    public static double divide(double value1, double value2){
+        double value3 = 0;
+        try{
+            value3 = value1 / value2;
+            System.out.println("\nThis code is from TRY section");
+        } catch (ArithmeticException e) {
+            System.out.printf("\nThis code from CATCH section contains exception: %s", e);
+        } finally {
+            System.out.println();
+            System.out.println("This code is from FINALLY section and runs always no matter if TRY section is successful or not");
+        }
+        System.out.println("Returning result.");
+        return value3;
+    }
+
+    public static double divideInt(int value1, int value2){
+        double value3 = 0;
+        try{
+            value3 = value1 / value2;
+            System.out.println("\nThis code is from TRY section");
+        } catch (ArithmeticException e) {
+            System.out.printf("\nThis code from CATCH section contains exception: %s", e);
+        } finally {
+            System.out.println("This code is from FINALLY section and runs always no matter if TRY section is successful or not");
+        }
+        System.out.println("Returning result.");
+        return value3;
     }
 
     public enum dayOfWeek{
